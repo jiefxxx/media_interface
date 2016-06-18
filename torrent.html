@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>Server management</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="torrent.js"></script>
+  </head>
+
+  <body>
+
+    <header>
+    </header>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="torrent.html">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="torrent.html">Home</a></li>
+          <li class="active"><a href="torrent.html">Torrent Manager</a></li>
+          <li><a href="series.html">Series</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div ng-app="myApp" ng-controller="urlCtrl">
+
+    <div class="container-fluid">
+        <div class="table-responsive" >
+          <table class="table table-bordered table-hover table-striped table-condensed">
+            <tr>
+              <div class="container-fluid">
+                <form class="form-horizontal" role="form">
+                  <div class="form-group">
+                    <div class="col-sm-11">
+                      <input type="text" ng-model="url" class="form-control">
+                    </div>
+                    <button ng-click="add()" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </tr>
+            <tr class="info">
+              <td>#</td>
+              <td class="col-md-6">name</td>
+              <td>progress</td>
+              <td>down rate</td>
+              <td>size</td>
+              <td>time</td>
+              <td>seed</td>
+              <td></td>
+            </tr>
+            <tr ng-repeat="x in names|orderBy : 'position'" class="{{get_class(x.state)}}">
+              <td>{{ x.position }}</td>
+              <td>{{ x.name }}</td>
+              <td>
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ x.progress}}"
+                aria-valuemin="0" aria-valuemax="100" style="width:{{ x.progress}}%">{{ x.progress.toFixed(2) }}%
+                </div>
+              </td>
+              <td>{{ (x.downRate/1000000).toFixed(2) }}Mb/s</td>
+              <td>{{ (x.size/1000000).toFixed(2) }}Mb</td>
+              <td>{{ ((x.size-x.size_down)/x.downRate/60).toFixed(1) }}Min</td>
+              <td>{{ x.seeds }}</td>
+              <td>
+                <div class="btn-group">
+                  <button type="button" ng-click="torrent_action(names[$index].id,'Qup')"class="btn btn-primary btn-xs">up</button>
+                  <button type="button" ng-click="torrent_action(names[$index].id,'Qdown')"class="btn btn-primary btn-xs">down</button>
+                  <button type="button" ng-click="torrent_action(names[$index].id,'pause')" class="btn btn-success btn-xs">pause</button>
+                  <button type="button" ng-click="torrent_action(names[$index].id,'stop')" class="btn btn-warning btn-xs">stop</button>
+                  <button type="button" ng-click="torrent_action(names[$index].id,'delete')"class="btn btn-danger btn-xs">del</button>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+    </footer>
+
+  </body>
+
+</html>
