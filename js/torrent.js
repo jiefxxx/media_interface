@@ -3,7 +3,7 @@ app.controller('urlCtrl',function($scope,$interval){
 
   $scope.refresh_torrent = function(){
     $.ajax({
-      url: 'http://127.0.0.1:8888/tm/info',
+      url: 'http://'+SERVER+'/tm/info',
       type: 'get',
       dataType: 'json',
       success: function (data) {
@@ -29,7 +29,7 @@ app.controller('urlCtrl',function($scope,$interval){
   }
   $scope.add_from_magnet = function (magnet) {
     $.ajax({
-      url: 'http://127.0.0.1:8888/tm/add',
+      url: 'http://'+SERVER+'/tm/add',
       type: 'post',
       dataType: 'json',
       success: function (data) {
@@ -41,7 +41,7 @@ app.controller('urlCtrl',function($scope,$interval){
   };
   $scope.add_from_url = function (url) {
     $.ajax({
-      url: 'http://127.0.0.1:8888/tm/add',
+      url: 'http://'+SERVER+'/tm/add',
       type: 'post',
       dataType: 'json',
       success: function (data) {
@@ -54,7 +54,7 @@ app.controller('urlCtrl',function($scope,$interval){
   $scope.torrent_action = function(id,action){
     console.log({"id":id,"action":action})
     $.ajax({
-      url: 'http://127.0.0.1:8888/tm/torrent_action',
+      url: 'http://'+SERVER+'/tm/torrent_action',
       type: 'post',
       dataType: 'json',
       data: '{"id":'+id+',"action":"'+action+'"}'

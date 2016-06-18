@@ -4,7 +4,7 @@ app.factory('GET', function($q) {
     series: function(){
       var deferred = $q.defer();
       $.ajax({
-        url: 'http://127.0.0.1:8888/media/series',
+        url: 'http://'+SERVER+'/media/series',
         type: 'get',
         dataType: 'json',
         success: function (data) {
@@ -17,7 +17,7 @@ app.factory('GET', function($q) {
     serie: function(name){
       var deferred = $q.defer();
       $.ajax({
-        url: 'http://127.0.0.1:8888/media/series/'+name,
+        url: 'http://'+SERVER+'/media/series/'+name,
         type: 'get',
         dataType: 'json',
         success: function (data) {
